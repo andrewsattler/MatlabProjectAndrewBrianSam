@@ -45,21 +45,35 @@ allfoundcolumninorder;
 %person3    c       f       i
 [matrixofdistances] = findmatrixofdistances(i,j,allfoundrowinorder,allfoundcolumninorder)
 
+%above this line works well and outputs a matrix as described above
+
 %create a matrix of minimum pivots
 [matrixofminimumpivots] = findminimumpivotsviamaxout(matrixofdistances)
 
+%function above works well on small number of band members. haven't yet
+%found why it doesn't assign directions to some marchers in bigger
+%transitions
+
+
 %col# = spot# --- row# = person#
 %here are pairings
-[personnumber,spotnumber] = find(matrixofminimumpivots)
+[personnumber,spotnumber] = find(matrixofminimumpivots);
 
 
 %put i_target and j_target into struct
-[instructions] = assignijtargetstostruct(instructions,personnumber,spotnumber,i,j)
+[instructions] = assignijtargetstostruct(instructions,personnumber,spotnumber,i,j);
 
 %maintain positions
 
 %find and assign direction
-[instructions] = findandassigndirection(instructions, n_bandmembers,allfoundrowinorder,allfoundcolumninorder)
+[instructions] = findandassigndirection(instructions, n_bandmembers,allfoundrowinorder,allfoundcolumninorder);
+
+% now for the hard part
+% we need to make a collision checker
+
+%then when we have found the collisions
+%we need to make a fucntion to 1. add wait time 2. reorder directions or 3.
+%switch destinations
 
 
 
