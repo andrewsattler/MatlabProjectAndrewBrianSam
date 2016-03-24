@@ -29,9 +29,17 @@ for currentwaiter = 1:length(holdi);
     matrixofminimums(ivalue,:) = NaN;
 end
     
-
+% for debugging
+% row18 = []; 
+% row20 = [];
+% row24 = [];
+% row40 = [];
+% row41 = [];
+% row58 = [];
+%
 
 while length(find(matrixofminimumpivots)) ~= n
+    
     %max of each column
     [maxcols, rowindexofmax] = max(matrixofminimums);
     %max of those column maxes
@@ -46,26 +54,45 @@ while length(find(matrixofminimumpivots)) ~= n
     if sum(isnan(maxvaluecolumn)) == length(maxvaluecolumn)-1 || sum(isnan(maxvaluerow)) == length(maxvaluerow)-1
         %record location of this pivot
         matrixofminimumpivots(rowindexofmax(colindexofmaxmax),colindexofmaxmax(1)) = matrixofdistances(rowindexofmax(colindexofmaxmax),colindexofmaxmax(1));
+        matrixofminimumpivots(rowindexofmax(colindexofmaxmax),colindexofmaxmax(1));
+        
         %set row and col to NaN
-            %set all of row and all of col of mimimum val to NaN
+        %set all of row and all of col of maximum val to NaN
         matrixofminimums(:,colindexofmaxmax(1)) = NaN;
         matrixofminimums(rowindexofmax(colindexofmaxmax(1)),:) = NaN;
+        
+        %printouts to see changes
+        matrixofminimums;
         matrixofminimumpivots;
     else 
         %operate algorithm for reducing maximums
         %set the maxmax to NaN
         matrixofminimums(rowindexofmax(colindexofmaxmax),colindexofmaxmax(1)) = NaN;
+        
+        %printouts to see changes
+        matrixofminimums;
         matrixofminimumpivots;
     end
     
+%     %for debugging
+%     row18 = [row18; matrixofminimums(18,:)]; 
+%     row20 = [row20; matrixofminimums(20,:)];
+%     row24 = [row24; matrixofminimums(24,:)];
+%     row40 = [row40; matrixofminimums(40,:)];
+%     row41 = [row41; matrixofminimums(41,:)];
+%     row58 = [row58; matrixofminimums(58,:)];
+%     %
     
     %stops infinite loops when mistakes are made
     if ~isnan(matrixofminimums) == 0
         return
     end
+    
     %set minmin val to Inf from NaN
 %    matrixofminimumpivots(rowindexofmax(colindexofmaxmax),colindexofmaxmax(1)) = matrixofdistances(rowindexofmax(colindexofmaxmax),colindexofmaxmax(1));
 end
+
+matrixofminimums;
 
 
 
