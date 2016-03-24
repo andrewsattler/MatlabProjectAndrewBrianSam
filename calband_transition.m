@@ -57,6 +57,7 @@ allfoundcolumninorder;
 
 %col# = spot# --- row# = person#
 %here are pairings
+%not needed if using gs algorithm
 [personnumber,spotnumber] = find(matrixofminimumpivots);
 
 
