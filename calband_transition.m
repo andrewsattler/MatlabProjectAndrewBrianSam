@@ -123,6 +123,10 @@ end
 %*************************************************
 %Collision Checker
 %*************************************************
+%find i and j positions at each beat
+[marcher_i_positions,marcher_j_positions] = cc_ijpositions(instructions, allfoundrowinorder, allfoundcolumninorder);
+%ij position to linear index
+[linearindex_positions] = cc_ij2LI(initial_formation,marcher_i_positions,marcher_j_positions);
 
 %separate collision checker in multiple sections
 
