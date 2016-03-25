@@ -20,7 +20,7 @@ instructions = repmat(instructions,1,n_bandmembers);
 
 % This code finds the i and j indices of each target location and stores
 % them in i and j, respectively (note that i and j are not used as of yet!)
-[i,j] = find(target_formation)
+[i,j] = find(target_formation);
 
 % Now it is up to you to figure out how to use the information provided
 % to fill out the instructions struct array with appropriate values!
@@ -30,7 +30,7 @@ instructions = repmat(instructions,1,n_bandmembers);
 % find specific location of every band member up to the total number of
 % band members
 % put their i and j values in two column arrays
-[allfoundrowinorder,allfoundcolumninorder] = findcurrentlocationofbandmembers(initial_formation, n_bandmembers)
+[allfoundrowinorder,allfoundcolumninorder] = findcurrentlocationofbandmembers(initial_formation, n_bandmembers);
 %Q: do they output the right values?
 %A: it works! it outputs the indices of all of the band members in order
 %test
@@ -43,22 +43,23 @@ allfoundcolumninorder;
 %person1    a       d       g
 %person2    b       e       h
 %person3    c       f       i
-[matrixofdistances] = findmatrixofdistances(i,j,allfoundrowinorder,allfoundcolumninorder)
+[matrixofdistances] = findmatrixofdistances(i,j,allfoundrowinorder,allfoundcolumninorder);
 
-%above this line works well and outputs a matrix as described above
+%above this line WORKS WELL and outputs a matrix as described above
+
 
 %*************************************************
-%START maxout method
+%START gale shapely method
 %*************************************************
-[N, person_pref, spot_pref] = findprefs(matrixofdistances)
+[N, person_pref, spot_pref] = findprefs(matrixofdistances);
 
 %gs spots propose
-[personnumber, spotnumber] = findminimumpivotsgs1(N, person_pref, spot_pref)
+[personnumber, spotnumber] = findminimumpivotsgs1(N, person_pref, spot_pref);
 
 %gs person proposes
-[personnumber, spotnumber] = findminimumpivotsgs(N, person_pref, spot_pref)
+[personnumber, spotnumber] = findminimumpivotsgs(N, person_pref, spot_pref);
 %*************************************************
-%END galeshapely method
+%END gale shapely method
 %*************************************************
 
 
@@ -82,6 +83,19 @@ allfoundcolumninorder;
 %*************************************************
 
 
+%*************************************************
+%START hungarian algorithm method
+%*************************************************
+[spotnumber,~] = munkres(matrixofdistances);
+personnumber = rot90([1:N],3);
+
+%THIS ONE WORKS BEST SO FAR
+%not written by me!....damnit check out the wikipedia page though
+%*************************************************
+%END hungarian algorithm method
+%*************************************************
+
+
 %put i_target and j_target into struct
 [instructions] = assignijtargetstostruct(instructions,personnumber,spotnumber,i,j);
 
@@ -102,10 +116,15 @@ allfoundcolumninorder;
 %%delete this eventually
 n = n_bandmembers;
 for currentindex = 1:n
-    instructions(currentindex).wait = 0
+    instructions(currentindex).wait = 0;
 end
 %end delete
 
-%
+%*************************************************
+%Collision Checker
+%*************************************************
+
+
+
 %
 end
