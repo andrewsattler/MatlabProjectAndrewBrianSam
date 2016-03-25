@@ -124,6 +124,8 @@ end
 %Collision Checker
 %*************************************************
 
+%separate collision checker in multiple sections
+
 
 
 %
