@@ -47,22 +47,39 @@ allfoundcolumninorder;
 
 %above this line works well and outputs a matrix as described above
 
-%create a matrix of minimum pivots
-%[matrixofminimumpivots] = findminimumpivotsviamaxout(matrixofdistances)
-
+%*************************************************
+%START maxout method
+%*************************************************
 [N, person_pref, spot_pref] = findprefs(matrixofdistances)
-%gs
+
+%gs spots propose
+[personnumber, spotnumber] = findminimumpivotsgs1(N, person_pref, spot_pref)
+
+%gs person proposes
 [personnumber, spotnumber] = findminimumpivotsgs(N, person_pref, spot_pref)
+%*************************************************
+%END galeshapely method
+%*************************************************
+
+
 
 %function above works well on small number of band members. haven't yet
 %found why it doesn't assign directions to some marchers in bigger
 %transitions
 
+%*************************************************
+%START maxout method
+%*************************************************
+%create a matrix of minimum pivots
+%[matrixofminimumpivots] = findminimumpivotsviamaxout(matrixofdistances)
 
 %col# = spot# --- row# = person#
 %here are pairings
 %not needed if using gs algorithm
 %[personnumber,spotnumber] = find(matrixofminimumpivots);
+%*************************************************
+%START maxout method
+%*************************************************
 
 
 %put i_target and j_target into struct
