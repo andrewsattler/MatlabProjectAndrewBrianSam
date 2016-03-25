@@ -1,4 +1,5 @@
-function [  ] = cc_ijpositions(instructions, allfoundrowinorder, allfoundcolumninorder)
+function [marcher_i_positions,marcher_j_positions] = ...
+    cc_ijpositions(instructions, allfoundrowinorder, allfoundcolumninorder)
 %Identify Collisions
 %   Detailed explanation goes here
 
@@ -114,6 +115,8 @@ for current_beat = 1:max_beats
             otherwise
                 fprintf(['WARNING: BUG.\n'])
         end
+        marcher_i_positions(current_bandmember,current_beat) = i_marcher;
+        marcher_j_positions(current_bandmember,current_beat) = j_marcher;
     end
 end
 
