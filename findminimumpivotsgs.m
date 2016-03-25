@@ -1,4 +1,4 @@
-function [stablematches] = findminimumpivotsgs(N, person_pref, spot_pref)
+function [personnumber, spotnumber,N] = findminimumpivotsgs(N, person_pref, spot_pref)
 %UNTITLED Summary of this function goes here
 %   Detailed explanation goes here
 %---------GALE - SHAPLEY ALGORITHM (person proposes) --------%
@@ -45,8 +45,8 @@ while (min(spot_partner) == 0)
         end
     end
 end
-
-stablematch = spot_partner;
+personnumber = rot90([1:N],3);
+spotnumber = spot_partner;
 
 end
 
