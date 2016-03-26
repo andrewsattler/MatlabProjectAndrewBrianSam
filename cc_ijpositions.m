@@ -1,5 +1,6 @@
 function [marcher_i_positions,marcher_j_positions] = ...
-    cc_ijpositions(instructions, allfoundrowinorder, allfoundcolumninorder)
+    cc_ijpositions(instructions, allfoundrowinorder, allfoundcolumninorder,...
+    max_beats, n_bandmembers)
 %Identify Collisions
 %   Detailed explanation goes here
 
@@ -9,23 +10,23 @@ function [marcher_i_positions,marcher_j_positions] = ...
 %bandmember1    pos1    pos2    pos3
 %bandmember2    pos4    pos5    pos5
 %bandmember3    pos8    pos8    pos8
-marcher_i_positions = zeros([maxbeats,n_bandmembers]);
-marcher_j_positions = zeros([maxbeats,n_bandmembers]);
+marcher_i_positions = zeros([n_bandmembers,max_beats]);
+marcher_j_positions = zeros([n_bandmembers,max_beats]);
 
 %add initial conditions
 marcher_i_positions(:,1) = allfoundrowinorder;
 marcher_j_positions(:,1) = allfoundcolumninorder;
 
 
-for current_beat = 1:max_beats
+for current_beat = 2:max_beats
     for current_bandmember = 1:n_bandmembers
         
-        i_marcher = marcher_i_positions(current_bandmember,current_beat);
-        j_marcher = marcher_j_positions(current_bandmember,current_beat);
-        i_target = inst(current_bandmember).i_target;
-        j_target = inst(current_bandmember).j_target;
+        i_marcher = marcher_i_positions(current_bandmember,current_beat-1);
+        j_marcher = marcher_j_positions(current_bandmember,current_beat-1);
+        i_target = instructions(current_bandmember).i_target;
+        j_target = instructions(current_bandmember).j_target;
         
-        switch inst(current_bandmember).direction
+        switch instructions(current_bandmember).direction
             case '.'
                 %do nothing
             case 'N'
