@@ -123,10 +123,17 @@ end
 %*************************************************
 %Collision Checker
 %*************************************************
+%               beat1   beat2   beat3
+%bandmember1    pos1    pos2    pos3
+%bandmember2    pos4    pos5    pos5
+%bandmember3    pos8    pos8    pos8
+
 %find i and j positions at each beat
-[marcher_i_positions,marcher_j_positions] = cc_ijpositions(instructions, allfoundrowinorder, allfoundcolumninorder);
+[marcher_i_positions,marcher_j_positions] = cc_ijpositions(instructions, allfoundrowinorder, allfoundcolumninorder,max_beats, n_bandmembers)
 %ij position to linear index
-[linearindex_positions] = cc_ij2LI(initial_formation,marcher_i_positions,marcher_j_positions);
+[linearindex_positions] = cc_ij2LI(initial_formation,marcher_i_positions,marcher_j_positions)
+%check if any two linear indexes are equal in each column
+findsamespacecollision(linearindex_positions)
 
 %separate collision checker in multiple sections
 
