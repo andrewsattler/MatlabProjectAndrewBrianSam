@@ -121,7 +121,7 @@ end
 %end delete
 
 %*************************************************
-%Collision Checker
+%Start Collision Checker
 %*************************************************
 %               beat1   beat2   beat3
 %bandmember1    pos1    pos2    pos3
@@ -134,10 +134,22 @@ end
 [linearindex_positions] = cc_ij2LI(initial_formation,marcher_i_positions,marcher_j_positions)
 %check if any two linear indexes are equal in each column
 findsamespacecollision(linearindex_positions)
-
 %separate collision checker in multiple sections
+%*************************************************
+%End Collision Checker
+%*************************************************
 
 
 
-%
+%*************************************************
+%Last Minute Wrap Up Stuff
+%*************************************************
+
+%Check if instructions are valid before submitting
+%currently this function is the one written by gsis in the visualizer
+%need to edit
+function [valid, valid_inst, msg] = cbl_check_inst(initial_formation, target_formation, instructions, max_beats)
+%keep working on this
+
+
 end
