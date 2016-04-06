@@ -58,7 +58,7 @@ allfoundcolumninorder;
 % we will eventually be coding our own hungarian algorithm
 
 %create a matrix of minimum pivots
-[matrixofminimumpivots] = findminimumpivots(matrixofdistances)
+[matrixofminimumpivots] = findminimumpivots(matrixofdistances);
 
 %col# = spot# --- row# = person#
 %here are pairings
@@ -76,15 +76,21 @@ allfoundcolumninorder;
 %START maxout method
 %*************************************************
 %create a matrix of minimum pivots
-%[matrixofminimumpivots] = findminimumpivotsviamaxout(matrixofdistances)
+%line below would be uncommented
+%**uncomment**[matrixofminimumpivots] = findminimumpivotsviamaxout(matrixofdistances)
 
 %col# = spot# --- row# = person#
 %here are pairings
 %not needed if using gs algorithm
-%[personnumber,spotnumber] = find(matrixofminimumpivots);
+%line below would be uncommented
+%**uncomment**[personnumber,spotnumber] = find(matrixofminimumpivots);
+
 %*************************************************
 %END maxout method
 %*************************************************
+
+
+
 
 %*************************************************
 %START gale shapely method
