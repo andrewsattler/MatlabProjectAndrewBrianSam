@@ -2,6 +2,9 @@ function [matrixofminimumpivots] = findminimumpivots(matrixofdistances)
 %create a matrix of minimum pivots
 %this method takes the smallest distances and pairs those up first
 
+%take care of 0 distances
+matrixofdistances(matrixofdistances==0) = .1;
+
 matrixofminimums = matrixofdistances;
 matrixofminimumpivots = zeros(size(matrixofdistances));
 n = length(matrixofdistances);
