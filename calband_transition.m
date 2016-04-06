@@ -52,6 +52,11 @@ allfoundcolumninorder;
 %*************************************************
 %START min method
 %*************************************************
+%this is NOT the one we are using. this is for beta because it definitely
+%doesn't throw any errors
+%check out maxout or galeshapely methods
+% we will eventually be coding our own hungarian algorithm
+
 %create a matrix of minimum pivots
 [matrixofminimumpivots] = findminimumpivots(matrixofdistances)
 
