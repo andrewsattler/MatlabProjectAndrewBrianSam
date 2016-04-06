@@ -10,6 +10,11 @@ function [] = findsamespacecollision(linearindex_positions)
 %     repeatedValues = uniqueofcurrentcolumn(indexofRepeatedValue);
 %     numberOfAppearancesOfRepeatedValues = countOfcurrentcolumn(indexofRepeatedValue);
 % end
+duplicatevalues
+%         Column#  Column#
+% dupval    5        4
+% dupval
+% dupval
 
 for currentcolumn = 1:size(linearindex_positions,2)
     % indices to unique values in column 3
