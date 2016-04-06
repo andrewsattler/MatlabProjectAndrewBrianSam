@@ -47,24 +47,23 @@ allfoundcolumninorder;
 
 %above this line WORKS WELL and outputs a matrix as described above
 
+%********** START ASSIGN PEOPLE TO SPOTS
 
 %*************************************************
-%START gale shapely method
+%START min method
 %*************************************************
-[N, person_pref, spot_pref] = findprefs(matrixofdistances);
+%create a matrix of minimum pivots
+[matrixofminimumpivots] = findminimumpivots(matrixofdistances)
 
-%gs spots propose
-[personnumber, spotnumber] = findminimumpivotsgs1(N, person_pref, spot_pref);
-
-%gs person proposes
-[personnumber, spotnumber] = findminimumpivotsgs(N, person_pref, spot_pref);
+%col# = spot# --- row# = person#
+%here are pairings
+%not needed if using gs algorithm
+[personnumber,spotnumber] = find(matrixofminimumpivots);
 %*************************************************
-%END gale shapely method
+%END min method
 %*************************************************
 
-
-
-%function above works well on small number of band members. haven't yet
+%maxout method works well on small number of band members. haven't yet
 %found why it doesn't assign directions to some marchers in bigger
 %transitions
 
@@ -79,22 +78,44 @@ allfoundcolumninorder;
 %not needed if using gs algorithm
 %[personnumber,spotnumber] = find(matrixofminimumpivots);
 %*************************************************
-%START maxout method
+%END maxout method
+%*************************************************
+
+%*************************************************
+%START gale shapely method
+%*************************************************
+
+% [N, person_pref, spot_pref] = findprefs(matrixofdistances);
+
+%gs spots propose
+% [personnumber, spotnumber] = findminimumpivotsgs1(N, person_pref, spot_pref);
+
+%this one works well
+
+%gs person proposes
+%[personnumber, spotnumber] = findminimumpivotsgs(N, person_pref, spot_pref);
+%*************************************************
+%END gale shapely method
 %*************************************************
 
 
 %*************************************************
 %START hungarian algorithm method
 %*************************************************
-[spotnumber,~] = munkres(matrixofdistances);
-personnumber = rot90([1:N],3);
+%N = n_bandmembers;
+%[spotnumber,~] = munkres(matrixofdistances);
+%personnumber = rot90([1:N],3);
 
 %THIS ONE WORKS BEST SO FAR
-%not written by me!....damnit check out the wikipedia page though
+%not written by me!....damnit...check out the wikipedia page though
 %*************************************************
 %END hungarian algorithm method
 %*************************************************
 
+
+%
+%********** END ASSIGN PEOPLE TO SPOTS
+%
 
 %put i_target and j_target into struct
 [instructions] = assignijtargetstostruct(instructions,personnumber,spotnumber,i,j);
@@ -111,8 +132,7 @@ personnumber = rot90([1:N],3);
 %we need to make a fucntion to 1. add wait time 2. reorder directions or 3.
 %switch destinations
 
-
-
+%*****Sets Wait Times to 0
 %%delete this eventually
 n = n_bandmembers;
 for currentindex = 1:n
@@ -129,11 +149,11 @@ end
 %bandmember3    pos8    pos8    pos8
 
 %find i and j positions at each beat
-[marcher_i_positions,marcher_j_positions] = cc_ijpositions(instructions, allfoundrowinorder, allfoundcolumninorder,max_beats, n_bandmembers)
+[marcher_i_positions,marcher_j_positions] = cc_ijpositions(instructions, allfoundrowinorder, allfoundcolumninorder,max_beats, n_bandmembers);
 %ij position to linear index
-[linearindex_positions] = cc_ij2LI(initial_formation,marcher_i_positions,marcher_j_positions)
+[linearindex_positions] = cc_ij2LI(initial_formation,marcher_i_positions,marcher_j_positions);
 %check if any two linear indexes are equal in each column
-findsamespacecollision(linearindex_positions)
+%findsamespacecollision(linearindex_positions)
 %separate collision checker in multiple sections
 %*************************************************
 %End Collision Checker
@@ -142,13 +162,13 @@ findsamespacecollision(linearindex_positions)
 
 
 %*************************************************
-%Last Minute Wrap Up Stuff
+%Wrap Up Stuff
 %*************************************************
 
 %Check if instructions are valid before submitting
 %currently this function is the one written by gsis in the visualizer
 %need to edit
-function [valid, valid_inst, msg] = cbl_check_inst(initial_formation, target_formation, instructions, max_beats)
+%function [valid, valid_inst, msg] = cbl_check_inst(initial_formation, target_formation, instructions, max_beats)
 %keep working on this
 
 
